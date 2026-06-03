@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anas Abdullah | Cybersecurity Core</title>
+    <style>
+        :root {
+            --bg-dark: #020406;
+            --panel-bg: rgba(4, 8, 15, 0.95);
+            --neon-green: #00ff66;
+            --cyber-cyan: #00f0ff;
+            --text-main: #ffffff;
+            --text-muted: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Matrix Rain Background */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        header {
+            background: rgba(2, 4, 6, 0.98);
+            border-bottom: 1px solid rgba(0, 255, 102, 0.15);
+            position: fixed;
+            width: 100%;
+            top: 0; z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 1.2rem 2rem;
+            align-items: center;
+        }
+
+        .terminal-logo {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.15rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            color: #a8b2d1;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-green);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10rem 2rem 4rem 2rem;
+        }
+
+        /* HERO INTERFACE */
+        .hero-interface {
+            min-height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 6rem;
+        }
+
+        /* image_a35203.png Status Box Style */
+        .system-tags-container {
+            border: 1px dashed rgba(0, 255, 102, 0.4);
+            padding: 10px 20px;
+            width: fit-content;
+            background: rgba(0, 255, 102, 0.02);
+            margin-bottom: 2rem;
+        }
+
+        .system-tags {
+            display: flex;
+            gap: 2.5rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--neon-green);
+            letter-spacing: 1px;
+            min-width: 550px;
+        }
+
+        .hero-interface h1 {
+            font-size: 4.5rem;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        /* Typing Container */
+        .typing-container {
+            font-size: 1.25rem;
+            color: var(--cyber-cyan);
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            min-height: 2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .typed-cursor {
+            color: var(--cyber-cyan);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Dynamic Description Area linked to currently visible titles */
+        .hero-description {
+            color: #cbd5e1;
+            max-width: 850px;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            border-left: 3px solid var(--neon-green);
+            padding-left: 1.5rem;
+            white-space: pre-line;
+            min-height: 110px;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .execute-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--neon-green);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border: 1px solid var(--neon-green);
+            padding: 0.9rem 2.2rem;
+            background: transparent;
+            transition: 0.3s;
+            width: fit-content;
+        }
+
+        .execute-btn:hover {
+            background: rgba(0, 255, 102, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        .section-title::before {
+            content: "[▶] ";
+            color: var(--neon-green);
+        }
+
+        /* PANELS & GRIDS */
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .terminal-panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 255, 102, 0.1);
+            border-top: 3px solid #1e293b;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .terminal-panel:hover {
+            border-top-color: var(--neon-green);
+            border-color: rgba(0, 255, 102, 0.3);
+        }
+
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--neon-green);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            padding: 0.6rem 1.2rem;
+            margin-top: 1.5rem;
+            width: fit-content;
+        }
+
+        .repo-link:hover {
+            background: var(--neon-green);
+            color: #000;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--cyber-cyan);
+            padding: 2px 8px;
+            width: fit-content;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        /* CONNECT SECTION */
+        .connect-section {
+            background: rgba(2, 4, 6, 0.9);
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .connect-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .connect-btn {
+            color: #ffffff;
+            text-decoration: none;
+            border: 1px dashed rgba(0, 240, 255, 0.4);
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .connect-btn:hover {
+            color: var(--cyber-cyan);
+            border-style: solid;
+            border-color: var(--cyber-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .hero-interface h1 { font-size: 2.8rem; }
+            .nav-links { display: none; }
+            .system-tags { gap: 1rem; font-size: 0.75rem; min-width: auto; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="terminal-logo">root@anas:~#</a>
+            <ul class="nav-links">
+                <li><a href="#projects">./my_projects</a></li>
+                <li><a href="#training">./training_and_skills</a></li>
+                <li><a href="#certifications">./global_certifications</a></li>
+                <li><a href="#connect">./connect</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO INTERFACE -->
+        <section class="hero-interface">
+            <!-- image_a35203.png DYNAMIC HEADER INTERFACE -->
+            <div class="system-tags-container">
+                <div class="system-tags" id="status-bar">
+                    <span>[HOST: SECURE]</span>
+                    <span id="changing-packet">PACKETS: INTERCEPTED</span>
+                    <span id="changing-env">ENV: SANDBOXED</span>
+                </div>
+            </div>
+            
+            <h1>Anas Abdullah</h1>
+            
+            <div class="typing-container">
+                <span id="typed-text"></span><span class="typed-cursor">|</span>
+            </div>
+
+            <!-- Dynamic Description text area -->
+            <p id="dynamic-description" class="hero-description"></p>
+            
+            <a href="#connect" class="execute-btn">>_ establish_handshake.sh</a>
+        </section>
+
+        <!-- SECTION 1: MY PROJECTS -->
+        <section id="projects">
+            <h2 class="section-title">My Projects</h2>
+            <div class="panel-grid">
+                <div class="terminal-panel">
+                    <div>
+                        <div class="tag">Network Offense / MITM</div>
+                        <h3>Man-in-the-Middle Attack Simulation</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Isolated environment mapping deployed to test structural ARP Poisoning loops and packet sniffing vector parameters.</p>
+                    </div>
+                    <a href="https://github.com/Anas-Abdullah-Sec/MITM-Attack-Simulation-Analysis" target="_blank" class="repo-link">[RUN_DIAGNOSTICS] ➔</a>
+                </div>
+
+                <div class="terminal-panel">
+                    <div>
+                        <div class="tag">Web Security / OWASP Audit</div>
+                        <h3>Vulnerability Assessment: DVWA</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Deep application vulnerability auditing using automated intercept tools to chart system input logic flaws.</p>
+                    </div>
+                    <a href="https://github.com/Anas-Abdullah-Sec/DVWA-Vulnerability-Assessment-OWASP-ZAP" target="_blank" class="repo-link">[RUN_DIAGNOSTICS] ➔</a>
+                </div>
+
+                <div class="terminal-panel">
+                    <div>
+                        <div class="tag">Infrastructure / Topology</div>
+                        <h3>CCNA Enterprise Network Layout</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Architectural layout of complex secure corporate intranets utilizing active VLAN isolation filters.</p>
+                    </div>
+                    <a href="https://github.com/Anas-Abdullah-Sec/CCNA-Enterprise-Network-Design" target="_blank" class="repo-link">[RUN_DIAGNOSTICS] ➔</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: TRAINING AND SKILLS (DIPLOMA FIRST, THEN NSDA) -->
+        <section id="training" style="margin-bottom: 6rem;">
+            <h2 class="section-title">Training & Skills</h2>
+            
+            <!-- 1. Diploma in IT Infrastructure (FIRST) -->
+            <div style="background: var(--panel-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 4px solid var(--cyber-cyan); padding: 2rem; margin-bottom: 2rem;">
+                <span style="color: var(--cyber-cyan); font-size: 0.8rem; font-weight: bold;">[ACADEMIC PROFESSIONAL TRACK]</span>
+                <h3 style="font-size: 1.25rem; margin: 0.3rem 0 0.8rem 0;">Diploma in IT Infrastructure & Cybersecurity</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8;">
+                    • <strong>Threat Detection & Analysis:</strong> Monitoring attack vectors and analyzing system logs.<br>
+                    • <strong>Vulnerability Management:</strong> Hands-on experience with Nessus and VMware to perform deep-level infrastructure audits.<br>
+                    • <strong>Network Defense:</strong> Designing secure and resilient network architectures based on enterprise-grade standards (CCNA, MTCNA).<br>
+                    • <strong>Critical Infrastructure Protection:</strong> Trained in securing high-value assets and industrial security standards.
+                </p>
+            </div>
+
+            <!-- 2. NSDA Penetration Testing (SECOND) -->
+            <div style="background: var(--panel-bg); border: 1px solid rgba(0, 255, 102, 0.2); border-left: 4px solid var(--neon-green); padding: 2rem;">
+                <span style="color: var(--neon-green); font-size: 0.8rem; font-weight: bold;">[NATIONAL COMPLIANCE]</span>
+                <h3 style="font-size: 1.25rem; margin: 0.3rem 0 0.8rem 0;">NSDA Penetration Testing for Freelancing (Level 4)</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">National standard professional qualification framework managed by National Skills Development Authority (NSDA) validating secure technical host validation and core reporting.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CORE ACADEMIC & ENGINEERING TRACKS (STANDALONE SECTIONS FOR ITEE & CS50) -->
+        <section id="engineering-tracks" style="margin-bottom: 4rem;">
+            <h2 class="section-title">Core Academic & Engineering Frameworks</h2>
+            
+            <!-- ITEE Framework Section -->
+            <div style="background: var(--panel-bg); border: 1px solid rgba(0, 255, 102, 0.15); border-top: 3px solid var(--neon-green); padding: 2.5rem; margin-bottom: 2rem;">
+                <div class="tag" style="background: rgba(0, 255, 102, 0.1); color: var(--neon-green);">Engineering Metric</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">ITEE Fundamental Engineer</h3>
+                <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1rem; line-height: 1.8;">
+                    International standard roadmap examination tracking elite foundational knowledge across architectural domains:
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; padding-left: 1rem;">
+                    • Advanced Computational Logic & Applied Discrete Mathematics.<br>
+                    • Algorithmic Optimization and Low-Level Data Structures.<br>
+                    • Secure Software Engineering Methodologies and Structural Systems Analysis.
+                </p>
+            </div>
+
+            <!-- CS50 Framework Section -->
+            <div style="background: var(--panel-bg); border: 1px solid rgba(0, 240, 255, 0.15); border-top: 3px solid var(--cyber-cyan); padding: 2.5rem;">
+                <div class="tag">Harvard Academic</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">CS50 Harvard Framework</h3>
+                <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1rem; line-height: 1.8;">
+                    Rigorous computational science foundation mapping deep programmatic implementation matrices:
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; padding-left: 1rem;">
+                    • Manual Memory Management, Pointer Manipulations, and Dynamic Allocation in C.<br>
+                    • Complexity Analysis (Big O Notation) sorting and parsing execution limits.<br>
+                    • Web Infrastructure Security concepts and database query sanitization.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GLOBAL CERTIFICATIONS -->
+        <section id="certifications" style="margin-bottom: 6rem;">
+            <h2 class="section-title">Global Certifications</h2>
+            <div class="panel-grid">
+                <div class="terminal-panel" style="border-top-color: var(--cyber-cyan);">
+                    <div class="tag">ISC2 Global Standard</div>
+                    <h3>Certified in Cybersecurity (CC)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Global verification tracking advanced access management controls, incident response schemas, and data security governance frameworks.</p>
+                </div>
+                <div class="terminal-panel" style="border-top-color: var(--cyber-cyan);">
+                    <div class="tag">Cisco Academy</div>
+                    <h3>Ethical Hacker (Cisco)</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Comprehensive credential certifying perimeter routing security mapping, vulnerabilities gathering logic, and active node remediation blueprints.</p>
+                </div>
+                <div class="terminal-panel" style="border-top-color: var(--cyber-cyan);">
+                    <div class="tag">OPSWAT Standard</div>
+                    <h3>Critical Infrastructure Protection</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Advanced engineering paths tracking secure zero-trust network designs, terminal node defenses, and asset management regulations.</p>
+                </div>
+                <div class="terminal-panel" style="border-top-color: var(--cyber-cyan);">
+                    <div class="tag">Cisco Foundation</div>
+                    <h3>Introduction to Cybersecurity</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Structural alignment validations validating global perimeter security controls and data defensive landscape parsing.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CONNECT -->
+        <section id="connect" class="connect-section">
+            <h2 style="font-size: 1.4rem; color: var(--neon-green);">// Establish Connection Protocol</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Initiate an endpoint interface socket link to sync communication channels:</p>
+            
+            <div class="connect-grid">
+                <a href="https://linkedin.com" target="_blank" class="connect-btn">[ LINKEDIN_PORT ]</a>
+                <a href="https://github.com/Anas-Abdullah-Sec" target="_blank" class="connect-btn">[ GITHUB_PORT ]</a>
+                <a href="mailto:anas@example.com" class="connect-btn">[ SECURE_MAIL ]</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px dashed rgba(255,255,255,0.05);">
+        // TERMINAL_MODE: RAW // STATUS: OPERATIONAL // © 2026 ANAS ABDULLAH
+    </footer>
+
+    <script>
+        // MATRIX BACKGROUND SYSTEM
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ｦｧｨｩｪｫｬｭｮｯｰｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
+        const charArr = chars.split("");
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(2, 4, 6, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff66';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArr[Math.floor(Math.random() * charArr.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 33);
+
+        // 🔄 1. DYNAMIC STATUS HEADER ROTATOR (image_a35203.png)
+        const packetStates = ["PACKETS: INTERCEPTED", "TRAFFIC: ANALYZED", "LOGS: PARSED", "THREATS: HUNTED"];
+        const envStates = ["ENV: SANDBOXED", "SESSION: SECURE", "NODE: ISOLATED", "STATUS: OPERATIONAL"];
+        let stateIndex = 0;
+
+        setInterval(() => {
+            stateIndex = (stateIndex + 1) % packetStates.length;
+            document.getElementById("changing-packet").textContent = packetStates[stateIndex];
+            document.getElementById("changing-env").textContent = envStates[stateIndex];
+        }, 3000);
+
+        // 🔄 2. 3-TITLES BUNDLE TYPING ENGINE WITH ALIGNED DESCRIPTIONS
+        const coreMatrix = [
+            {
+                titles: "Cybersecurity Analyst | Blue Teaming & Threat Hunting | Penetration Tester",
+                desc: "A security focused professional with a deep technical interest in Security Operations Center (SOC) and Blue Team operations. My approach centers on proactive threat detection, incident response, and securing complex network infrastructures. Specially trained in running isolated environment simulations to chart systemic flaws and neutralize advanced threat vectors."
+            },
+            {
+                titles: "Ethical Hacker (Cisco) | Infrastructure Defender | Core Security Practitioner",
+                desc: "Specialized in proactive system hardening, perimeter network testing, and architectural integrity validation. Utilizing comprehensive asset configuration management protocols to secure corporate infrastructures. Backed by structured national compliance and global security frameworks to prevent unauthorized input parsing vulnerabilities."
+            }
+        ];
+        
+        let matrixIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        const titleTarget = document.getElementById("typed-text");
+        const descTarget = document.getElementById("dynamic-description");
+
+        function processEngine() {
+            const currentItem = coreMatrix[matrixIndex];
+            
+            if (isDeleting) {
+                titleTarget.textContent = currentItem.titles.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                titleTarget.textContent = currentItem.titles.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            // Sync description switch right when titles start typing out
+            if (!isDeleting && charIndex === 1) {
+                descTarget.style.opacity = 0;
+                setTimeout(() => {
+                    descTarget.textContent = currentItem.desc;
+                    descTarget.style.opacity = 1;
+                }, 200);
+            }
+
+            let typeSpeed = isDeleting ? 15 : 40;
+
+            if (!isDeleting && charIndex === currentItem.titles.length) {
+                typeSpeed = 4000; // Keep current titles and matched description fixed for 4 seconds
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                matrixIndex = (matrixIndex + 1) % coreMatrix.length;
+                typeSpeed = 400;
+            }
+            setTimeout(processEngine, typeSpeed);
+        }
+        document.addEventListener("DOMContentLoaded", () => setTimeout(processEngine, 300));
+    </script>
+</body>
+</html>
