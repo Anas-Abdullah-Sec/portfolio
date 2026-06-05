@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anas Abdullah | Cybersecurity Core</title>
+    <title>Anas Abdullah | CyberSecurity Analyst</title>
     <style>
         :root {
             --bg-dark: #020406;
@@ -97,7 +97,7 @@
             margin-bottom: 6rem;
         }
 
-        /* image_a35203.png Status Box Style */
+        /* Status Box Style */
         .system-tags-container {
             border: 1px dashed rgba(0, 255, 102, 0.4);
             padding: 10px 20px;
@@ -288,6 +288,7 @@
             <ul class="nav-links">
                 <li><a href="#projects">./my_projects</a></li>
                 <li><a href="#training">./training_and_skills</a></li>
+                <li><a href="#engineering-tracks">./academic_frameworks</a></li>
                 <li><a href="#certifications">./global_certifications</a></li>
                 <li><a href="#connect">./connect</a></li>
             </ul>
@@ -297,7 +298,6 @@
     <main>
         <!-- HERO INTERFACE -->
         <section class="hero-interface">
-            <!-- image_a35203.png DYNAMIC HEADER INTERFACE -->
             <div class="system-tags-container">
                 <div class="system-tags" id="status-bar">
                     <span>[HOST: SECURE]</span>
@@ -351,11 +351,11 @@
             </div>
         </section>
 
-        <!-- SECTION 2: TRAINING AND SKILLS (DIPLOMA FIRST, THEN NSDA) -->
+        <!-- SECTION 2: TRAINING AND SKILLS -->
         <section id="training" style="margin-bottom: 6rem;">
             <h2 class="section-title">Training & Skills</h2>
             
-            <!-- 1. Diploma in IT Infrastructure (FIRST) -->
+            <!-- 1. Diploma in IT Infrastructure -->
             <div style="background: var(--panel-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 4px solid var(--cyber-cyan); padding: 2rem; margin-bottom: 2rem;">
                 <span style="color: var(--cyber-cyan); font-size: 0.8rem; font-weight: bold;">[ACADEMIC PROFESSIONAL TRACK]</span>
                 <h3 style="font-size: 1.25rem; margin: 0.3rem 0 0.8rem 0;">Diploma in IT Infrastructure & Cybersecurity</h3>
@@ -367,7 +367,7 @@
                 </p>
             </div>
 
-            <!-- 2. NSDA Penetration Testing (SECOND) -->
+            <!-- 2. NSDA Penetration Testing -->
             <div style="background: var(--panel-bg); border: 1px solid rgba(0, 255, 102, 0.2); border-left: 4px solid var(--neon-green); padding: 2rem;">
                 <span style="color: var(--neon-green); font-size: 0.8rem; font-weight: bold;">[NATIONAL COMPLIANCE]</span>
                 <h3 style="font-size: 1.25rem; margin: 0.3rem 0 0.8rem 0;">NSDA Penetration Testing for Freelancing (Level 4)</h3>
@@ -375,7 +375,7 @@
             </div>
         </section>
 
-        <!-- SECTION 3: CORE ACADEMIC & ENGINEERING TRACKS (STANDALONE SECTIONS FOR ITEE & CS50) -->
+        <!-- SECTION 3: CORE ACADEMIC & ENGINEERING TRACKS -->
         <section id="engineering-tracks" style="margin-bottom: 4rem;">
             <h2 class="section-title">Core Academic & Engineering Frameworks</h2>
             
@@ -441,9 +441,11 @@
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Initiate an endpoint interface socket link to sync communication channels:</p>
             
             <div class="connect-grid">
-                <a href="https://linkedin.com" target="_blank" class="connect-btn">[ LINKEDIN_PORT ]</a>
+                <!-- UPDATED LINKEDIN LINK -->
+                <a href="https://www.linkedin.com/in/anas2abdullah" target="_blank" class="connect-btn">[ LINKEDIN_PORT ]</a>
                 <a href="https://github.com/Anas-Abdullah-Sec" target="_blank" class="connect-btn">[ GITHUB_PORT ]</a>
-                <a href="mailto:anas@example.com" class="connect-btn">[ SECURE_MAIL ]</a>
+                <!-- UPDATED EMAIL LINK -->
+                <a href="mailto:info.anasabdullah@gmail.com" class="connect-btn">[ SECURE_MAIL ]</a>
             </div>
         </section>
     </main>
@@ -487,7 +489,7 @@
         }
         setInterval(drawMatrix, 33);
 
-        // 🔄 1. DYNAMIC STATUS HEADER ROTATOR (image_a35203.png)
+        // 1. DYNAMIC STATUS HEADER ROTATOR
         const packetStates = ["PACKETS: INTERCEPTED", "TRAFFIC: ANALYZED", "LOGS: PARSED", "THREATS: HUNTED"];
         const envStates = ["ENV: SANDBOXED", "SESSION: SECURE", "NODE: ISOLATED", "STATUS: OPERATIONAL"];
         let stateIndex = 0;
@@ -498,15 +500,15 @@
             document.getElementById("changing-env").textContent = envStates[stateIndex];
         }, 3000);
 
-        // 🔄 2. 3-TITLES BUNDLE TYPING ENGINE WITH ALIGNED DESCRIPTIONS
+        // 2. 3-TITLES BUNDLE TYPING ENGINE WITH UPDATED DESCRIPTION
         const coreMatrix = [
             {
                 titles: "Cybersecurity Analyst | Blue Teaming & Threat Hunting | Penetration Tester",
-                desc: "A security focused professional with a deep technical interest in Security Operations Center (SOC) and Blue Team operations. My approach centers on proactive threat detection, incident response, and securing complex network infrastructures. Specially trained in running isolated environment simulations to chart systemic flaws and neutralize advanced threat vectors."
+                desc: "Dedicated Cyber Security professional with hands-on experience in network security, penetration testing, and SOC analysis. Passionate about identifying vulnerabilities, analyzing network traffic, and implementing robust security frameworks to protect critical digital assets. Continuous learner always adapting to the evolving threat landscape.\n\nCore Competencies: Network Security | Penetration Testing | SOC Analysis | Vulnerability Assessment | Incident Response"
             },
             {
                 titles: "Ethical Hacker (Cisco) | Infrastructure Defender | Core Security Practitioner",
-                desc: "Specialized in proactive system hardening, perimeter network testing, and architectural integrity validation. Utilizing comprehensive asset configuration management protocols to secure corporate infrastructures. Backed by structured national compliance and global security frameworks to prevent unauthorized input parsing vulnerabilities."
+                desc: "Dedicated Cyber Security professional with hands-on experience in network security, penetration testing, and SOC analysis. Passionate about identifying vulnerabilities, analyzing network traffic, and implementing robust security frameworks to protect critical digital assets. Continuous learner always adapting to the evolving threat landscape.\n\nCore Competencies: Network Security | Penetration Testing | SOC Analysis | Vulnerability Assessment | Incident Response"
             }
         ];
         
@@ -540,7 +542,7 @@
             let typeSpeed = isDeleting ? 15 : 40;
 
             if (!isDeleting && charIndex === currentItem.titles.length) {
-                typeSpeed = 4000; // Keep current titles and matched description fixed for 4 seconds
+                typeSpeed = 4000; // Keep fixed for 4 seconds
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
